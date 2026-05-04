@@ -34,7 +34,7 @@ A research-grade, instrumented Firefox build for fingerprint risk-control analys
 
 ### 推荐工作流
 
-1. **先用 [ruyiPage](https://github.com/LoseNine/ruyiPage) 自动化框架（搭配配套的 151 内核）分析目标网页**，获取页面加载的全部 JS 文件并抓取关键数据包，建立网站的整体轮廓。
+1. **先用 [ruyiPage](https://github.com/LoseNine/ruyipage) 自动化框架，并使用其 Release 中配套的火狐指纹浏览器分析目标网页**，获取网站加载的全部 JS 文件并抓取完整的网络数据包，建立网站的整体轮廓。
 2. **再用本工具（如意 Trace）启动定制 Firefox 进行实际访问**，生成 NDJSON 运行时调用日志。
 3. **把日志直接交给 AI**，让 AI 结合第 1 步拿到的 JS 文件和数据包，对相关文件进行定位、补环境与指纹风控分析。
 
@@ -70,11 +70,13 @@ NDJSON 每行一条事件，结构如下：
 
 ```
 你是一名前端安全研究员。我已经做了如下前置工作：
-1. 先使用 ruyiPage 自动化框架（搭配配套 151 内核）分析了目标网页，
-   获取了页面加载的全部 JS 文件、抓取了关键数据包，建立了网站整体轮廓。
+1. 先使用 ruyiPage 自动化框架（https://github.com/LoseNine/ruyipage）
+   ——并使用其 release 中配套的火狐指纹浏览器——分析了目标网页，
+   获取了网站加载的全部 JS 文件，并抓取了完整的网络数据包，
+   建立了网站整体轮廓。
 2. 然后使用如意 Trace 工具采集了一份完整的 DOM/JS API 运行时调用日志（NDJSON）。
 
-现在我把这份运行时日志直接交给你，请你结合第 1 步拿到的 JS 文件与数据包：
+现在我把这份运行时日志直接交给你，请你结合第 1 步拿到的 JS 文件与网络数据包：
 1. 在 NDJSON 中识别所有指纹采集点（Canvas / WebGL / WebRTC / Audio /
    Navigator / Screen / Crypto），并定位到具体是哪个 JS 文件的哪个函数。
 2. 还原每个指纹函数的完整调用链与入口脚本。

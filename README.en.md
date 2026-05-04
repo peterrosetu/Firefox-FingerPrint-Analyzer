@@ -34,7 +34,7 @@ Because instrumentation lives in the **C++ engine**, page-side JavaScript cannot
 
 ### Recommended workflow
 
-1. **Start with the [ruyiPage](https://github.com/LoseNine/ruyiPage) automation framework (paired with its matching v151 engine)** to analyse the target site — collect every JS file the page loads and capture the relevant network packets, so you have the overall outline of the site.
+1. **Start with the [ruyiPage](https://github.com/LoseNine/ruyipage) automation framework, using the matching fingerprint Firefox browser bundled in its Release**, to analyse the target site — collect every JS file the site loads and capture the full network packet trace, so you have the overall outline of the site.
 2. **Then use this tool (Ruyi Trace) to actually visit the site with the custom Firefox**, producing an NDJSON runtime call log.
 3. **Hand the log directly to an AI** along with the JS files / packets from step 1, and let it locate the relevant files, build environment-replication code and analyse the fingerprinting risk-control logic.
 
@@ -71,15 +71,17 @@ NDJSON, one event per line:
 ```
 You are a front-end security researcher. I have already done the following
 preparation:
-1. Used the ruyiPage automation framework (with its matching v151 engine)
-   to analyse the target website, collecting every JS file the page loads
-   and capturing the relevant network packets — so I already have the
-   overall outline of the site.
+1. Used the ruyiPage automation framework
+   (https://github.com/LoseNine/ruyipage) — together with the matching
+   fingerprint Firefox browser shipped in its Release — to analyse the
+   target website, collecting every JS file the site loads and capturing
+   the full network packet trace, so I already have the overall outline
+   of the site.
 2. Then used Ruyi Trace to capture a complete runtime DOM / JS API call
    log (NDJSON).
 
 Now I am handing this runtime log directly to you. Combined with the JS
-files / packets from step 1, please:
+files / network packets from step 1, please:
 1. Identify every fingerprint collection point in the NDJSON
    (Canvas / WebGL / WebRTC / Audio / Navigator / Screen / Crypto), and
    pinpoint which JS file and which function each one lives in.
